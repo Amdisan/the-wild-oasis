@@ -60,7 +60,10 @@ function UpdateUserDataForm() {
         <FileInput
           id="avatar"
           accept="image/*"
-          onChange={(e) => setAvatar(e.target.files[0])}
+          onChange={(e) => {
+            console.log(e.target.files[0]);
+            setAvatar(e.target.files[0]);
+          }}
           disabled={isUpdating}
         />
       </FormRow>
@@ -70,7 +73,6 @@ function UpdateUserDataForm() {
           variation="secondary"
           disabled={isUpdating}
           onClick={handleCancel}
-          
         >
           Cancel
         </Button>

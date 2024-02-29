@@ -8,7 +8,7 @@ export async function signup({ fullName, email, password }) {
   });
 
   if (error) throw new Error(error.message);
-
+  console.log(data, 'signup');
   return data;
 }
 
@@ -19,6 +19,7 @@ export async function login({ email, password }) {
   });
 
   if (error) throw new Error(error.message);
+  console.log(data?.user.user_metadata, 'login');
 
   return data;
 }
@@ -31,6 +32,8 @@ export async function getCurrentUser() {
   const { data, error } = await supabase.auth.getUser();
 
   if (error) throw new Error(error.message);
+
+  console.log(data?.user.user_metadata, 'getUser');
 
   return data?.user;
 }
@@ -69,5 +72,6 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
     },
   });
   if (error2) throw new Error(error2.message);
+  console.log(updatedUser, 'updatedUser');
   return updatedUser;
 }
