@@ -31,7 +31,6 @@ function BookingDetail() {
   const { booking = {}, isLoading } = useBooking();
   const { status, id: bookingId } = booking;
   const { isDeleting, deleteBooking } = useDeleteBooking();
-
   const moveBack = useMoveBack();
 
   if (isLoading) return <Spinner />;
@@ -65,7 +64,9 @@ function BookingDetail() {
         {status === 'checked-in' && (
           <Button
             icon={<HiArrowUpOnSquare />}
-            onClick={() => checkout(bookingId)}
+            onClick={() =>
+              checkout(bookingId, { onSettled: () => navigate(-1) })
+            }
             disabled={isCheckingOut}
           >
             Check out

@@ -15,6 +15,8 @@ import Checkbox from '../../ui/Checkbox';
 import { formatCurrency } from '../../utils/helpers';
 import { useCheckin } from './useCheckin';
 import { useSettings } from '../settings/useSettings';
+import { useBookingsPath } from '../../context/BookingsPathContext';
+import { useNavigate } from 'react-router-dom';
 
 const Box = styled.div`
   /* Box */
@@ -30,8 +32,22 @@ function CheckinBooking() {
   const { booking = {}, isLoading } = useBooking();
   const { isLoading: isLoadingSettings, settings = {} } = useSettings();
   const moveBack = useMoveBack();
+  const { path } = useBookingsPath();
+  const navigate = useNavigate();
 
   const { checkin, isCheckingIn } = useCheckin();
+
+  function navigateBookings() {
+    if (!path?.search && path?.pathname) {
+      navigate(path?.pathname);
+    }
+    if (path?.search && path?.pathname) {
+      navigate(`${path.pathname}${path.search}`);
+    }
+    if (!path?.search && !path?.pathname) {
+      navigate('/');
+    }
+  }
 
   useEffect(() => setConfirmPaid(booking?.isPaid ?? false), [booking.isPaid]);
 
@@ -51,16 +67,26 @@ function CheckinBooking() {
     if (!confirmPaid) return;
 
     if (addBreakfast) {
-      checkin({
-        bookingId,
-        breakfast: {
-          hasBreakfast: true,
-          extrasPrice: optionalBreakfastPrice,
-          totalPrice: totalPrice + optionalBreakfastPrice,
+      checkin(
+        {
+          bookingId,
+          breakfast: {
+            hasBreakfast: true,
+            extrasPrice: optionalBreakfastPrice,
+            totalPrice: totalPrice + optionalBreakfastPrice,
+          },
         },
-      });
+        {
+          onSettled: navigateBookings,
+        }
+      );
     } else {
-      checkin({ bookingId, breakfast: {} });
+      checkin(
+        { bookingId, breakfast: {} },
+        {
+          onSettled: navigateBookings,
+        }
+      );
     }
   }
 

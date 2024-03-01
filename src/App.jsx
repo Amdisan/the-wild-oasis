@@ -19,6 +19,7 @@ import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
 import ProtectedRoute from './ui/ProtectedRoute';
 import { DarkModeProvider } from './context/DarkModeContext';
+import { BookingsPathProvider } from './context/BookingsPathContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,6 +36,7 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
         <GlobalStyles />
         <BrowserRouter>
+        <BookingsPathProvider>
           <Routes>
             <Route
               element={
@@ -56,6 +58,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
+          </BookingsPathProvider>
         </BrowserRouter>
         <Toaster
           position="top-center"
