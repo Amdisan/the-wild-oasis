@@ -1,23 +1,20 @@
 import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
+import { formatDistanceFromNow, formatCurrency } from '../../utils/helpers';
 import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
 } from 'react-icons/hi2';
-
-import DataItem from '../../ui/DataItem';
 import { Flag } from '../../ui/Flag';
-
-import { formatDistanceFromNow, formatCurrency } from '../../utils/helpers';
+import DataItem from '../../ui/DataItem';
 
 const StyledBookingDataBox = styled.section`
   /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
-
   overflow: hidden;
 `;
 

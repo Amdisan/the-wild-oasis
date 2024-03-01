@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import { HiXMark } from 'react-icons/hi2';
-import styled from 'styled-components';
 
 const StyledModal = styled.div`
   position: fixed;

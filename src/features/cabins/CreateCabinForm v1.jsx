@@ -1,9 +1,7 @@
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-
 import { createCabin } from '../../services/apiCabins';
-
 import Input from '../../ui/Input';
 import Form from '../../ui/Form';
 import Button from '../../ui/Button';
@@ -13,9 +11,7 @@ import FormRow from '../../ui/FormRow';
 
 function CreateCabinForm() {
   const queryClient = useQueryClient();
-
   const { register, handleSubmit, reset, getValues, formState } = useForm();
-
   const { errors } = formState;
 
   const { mutate, isLoading } = useMutation({
@@ -36,7 +32,7 @@ function CreateCabinForm() {
 
   //will be called by handlesubmit if there is form validation error
   function onError(errors) {
-    // console.log(errors);
+    console.log(errors);
   }
 
   return (

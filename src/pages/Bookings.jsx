@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useBookingsPath } from '../context/BookingsPathContext';
 import BookingTable from '../features/bookings/BookingTable';
 import BookingTableOperations from '../features/bookings/BookingTableOperations';
 import Heading from '../ui/Heading';
 import Row from '../ui/Row';
-import { useBookingsPath } from '../context/BookingsPathContext';
-import { useEffect } from 'react';
 
 function Bookings() {
   const { pathname, search } = useLocation();
